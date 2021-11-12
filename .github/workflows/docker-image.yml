@@ -21,7 +21,7 @@ jobs:
           do
             IFS='.' read -ra names_array <<< "$file"
             echo Building ${names_array[1]}/${names_array[2]}
-            docker build . --file $file --tag $names_array[1]/$names_array[2]
+            docker build . --file $file --tag ${names_array[1]}/${names_array[2]}
           done
 
 
@@ -43,6 +43,6 @@ jobs:
           do
             IFS='.' read -ra names_array <<< "$file"
             echo Pusing ${names_array[1]}/${names_array[2]}
-            docker push $names_array[1]/$names_array[2]
+            docker push ${names_array[1]}/${names_array[2]}
           done
           
