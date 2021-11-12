@@ -20,8 +20,8 @@ jobs:
           for file in Dockerfile.*
           do
             IFS='.' read -ra names_array <<< "$file"
-            echo ${names_array[1]}/${names_array[2]}
-            #docker build . --file $file --tag $names_array[1]/$names_array[2]
+            echo Building ${names_array[1]}/${names_array[2]}
+            docker build . --file $file --tag $names_array[1]/$names_array[2]
           done
 
 
@@ -38,10 +38,11 @@ jobs:
     - name: Push image to GitHub Container Registry
       run: |
         # Strip git ref prefix from version
-        docker push ${{ github.ref }}
-        for file in Dockerfile.*
+        
+          for file in Dockerfile.*
           do
-            IFS=';' read -ra names_array <<< "$file"
+            IFS='.' read -ra names_array <<< "$file"
+            echo Pusing ${names_array[1]}/${names_array[2]}
             docker push $names_array[1]/$names_array[2]
           done
           
