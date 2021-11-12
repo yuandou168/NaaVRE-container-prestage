@@ -19,7 +19,7 @@ jobs:
       run:  |
           for file in Dockerfile.*
           do
-            IFS=';' read -ra names_array <<< "$file"
+            IFS='.' read -ra names_array <<< "$file"
             echo ${names_array[1]}/${names_array[2]}
             #docker build . --file $file --tag $names_array[1]/$names_array[2]
           done
