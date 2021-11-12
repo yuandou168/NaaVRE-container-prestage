@@ -17,7 +17,11 @@ jobs:
     - uses: actions/checkout@v2        
     - name: Build image
       run:  |
-        for file in Dockerfile.*; do echo $file; done
+          for file in Dockerfile.*
+          do
+            IFS=';' read -ra names_array <<< "$file"
+            docker build . --file $file --tag $names_array[1]/$names_array[2]
+          done
 
 
       
@@ -34,4 +38,9 @@ jobs:
       run: |
         # Strip git ref prefix from version
         docker push ${{ github.ref }}
+        for file in Dockerfile.*
+          do
+            IFS=';' read -ra names_array <<< "$file"
+            docker push $names_array[1]/$names_array[2]
+          done
           
