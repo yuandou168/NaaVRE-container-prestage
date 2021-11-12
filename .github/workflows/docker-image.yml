@@ -16,7 +16,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2        
     - name: Build image
-      run: echo ${{ github.ref }} #docker build . --file Dockerfile --tag ${{ github.ref }}
+      run:  |
+        for file in Dockerfile.*; do echo $file; done
+
+
+      
       
       
     - name: Login to GitHub Container Registry
