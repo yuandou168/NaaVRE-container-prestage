@@ -10,5 +10,6 @@ do
   IFS='.' read -ra names_array <<< "$dockerfile"
     echo Building ${names_array[1]}/${names_array[2]}
     docker build . --file $dockerfile --tag ${names_array[1]}/${names_array[2]}
+    docker push ${names_array[1]}/${names_array[2]}
   ((counter++))
 done
