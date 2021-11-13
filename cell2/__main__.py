@@ -18,6 +18,6 @@ if __name__ == '__main__':
 
     pool = ThreadPool(processes=1)
     result = pool.apply_async(call, ('world', 'foo'))
-    get_call_status('world', 'foo')
+    get_call_status('world', 'bar')
     return_val = result.get()
     print('return_val: ' + return_val)
