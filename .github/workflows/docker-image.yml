@@ -42,12 +42,12 @@ jobs:
 
 
     - name: Push image to GitHub Container Registry
+    - uses: actions/checkout@v2
       run: |
         for changed_file in ${{ steps.files.outputs.all }}; do
           echo "Do something with this ${changed_file}."
           DIR="$(dirname "${changed_file}")"
           echo $DIR
-          ls 
           if [ "$DIR" != ".github/workflows" ]; then
             cd $DIR
             dockerfile=`ls Dockerfile.*`
