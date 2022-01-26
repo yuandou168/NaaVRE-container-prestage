@@ -16,19 +16,19 @@ jobs:
     steps:
     - id: files
       uses: jitterbit/get-changed-files@v1
-    - run: |
-        for changed_file in ${{ steps.files.outputs.all }}; do
-          echo "Do something with this ${changed_file}."
-          DIR="$(dirname "${changed_file}")"
-          echo $DIR
-          if [ "$DIR" != ".github/workflows" ]; then
-            cd $DIR
-            dockerfile=`ls Dockerfile.*`
-            IFS='.' read -ra names_array <<< "$dockerfile"
-            echo Building ${names_array[1]}/${names_array[2]}
-            docker build . --file $dockerfile --tag ${names_array[1]}/${names_array[2]}
-          fi
-        done    
+#     - run: |
+#         for changed_file in ${{ steps.files.outputs.all }}; do
+#           echo "Do something with this ${changed_file}."
+#           DIR="$(dirname "${changed_file}")"
+#           echo $DIR
+#           if [ "$DIR" != ".github/workflows" ]; then
+#             cd $DIR
+#             dockerfile=`ls Dockerfile.*`
+#             IFS='.' read -ra names_array <<< "$dockerfile"
+#             echo Building ${names_array[1]}/${names_array[2]}
+#             docker build . --file $dockerfile --tag ${names_array[1]}/${names_array[2]}
+#           fi
+#         done    
 #     - uses: actions/checkout@v2        
 #     - name: Build image
 #       run:  |
@@ -45,11 +45,14 @@ jobs:
       run: |
         for changed_file in ${{ steps.files.outputs.all }}; do
           echo "Do something with this ${changed_file}."
-          DIR="$(dirname "${VAR}")" ; FILE="$(basename "${VAR}")"
+          DIR="$(dirname "${changed_file}")"
+          echo $DIR
           if [ "$DIR" != ".github/workflows" ]; then
             cd $DIR
             dockerfile=`ls Dockerfile.*`
             IFS='.' read -ra names_array <<< "$dockerfile"
+            echo Building ${names_array[1]}/${names_array[2]}
+            docker build . --file $dockerfile --tag ${names_array[1]}/${names_array[2]}
             echo push ${names_array[1]}/${names_array[2]}
             docker push ${names_array[1]}/${names_array[2]}
           fi
