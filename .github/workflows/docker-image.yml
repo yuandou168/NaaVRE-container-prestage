@@ -20,6 +20,7 @@ jobs:
         for changed_file in ${{ steps.files.outputs.all }}; do
           echo "Do something with this ${changed_file}."
           DIR="$(dirname "${VAR}")" ; FILE="$(basename "${VAR}")"
+          echo $DIR
           if [ "$DIR" != "." ]; then
             dockerfile=`ls Dockerfile.*`
             IFS='.' read -ra names_array <<< "$dockerfile"
