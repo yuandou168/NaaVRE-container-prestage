@@ -1,10 +1,11 @@
+
+
 PARRENT_COMMIT=`git rev-list --all --parents --max-count=1`
 IFS=' ' read -ra COMMIT <<< "$PARRENT_COMMIT"
 VAR=`git diff --name-only HEAD ${COMMIT[1]}`
 DIR="$(dirname "${VAR}")" ; FILE="$(basename "${VAR}")"
 if [ "$DIR" != "." ]; then
   cd $DIR
-  wd=`pwd`
   dockerfile=`ls Dockerfile.*`
   IFS='.' read -ra names_array <<< "$dockerfile"
   echo Building ${names_array[1]}/${names_array[2]}
