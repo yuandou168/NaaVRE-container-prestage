@@ -1,7 +1,6 @@
 from laserfarm import Retiler
 import argparse
 arg_parser = argparse.ArgumentParser()
-
 arg_parser.add_argument('--laz_files', action='store', type=list, required='True', dest='laz_files')
 
 arg_parser.add_argument('--param_webdav_login', action='store', type=str, required='True', dest='param_webdav_login')
