@@ -1,6 +1,8 @@
 VAR=`git diff --name-only HEAD HEAD~1`
 DIR="$(dirname "${VAR}")" ; FILE="$(basename "${VAR}")"
 cd $DIR
+
+if [ "$DIR" != "/" ]; then
   dockerfile=`ls Dockerfile.*`
   IFS='.' read -ra names_array <<< "$dockerfile"
     echo Building ${names_array[1]}/${names_array[2]}
@@ -10,6 +12,8 @@ cd $DIR
     if [ $1 = "push" ]; then
       docker push ${names_array[1]}/${names_array[2]}
     fi
+else
+
     
 # counter=0
 # for file in ./*/
