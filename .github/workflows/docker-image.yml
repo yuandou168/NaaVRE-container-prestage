@@ -21,6 +21,7 @@ jobs:
           echo "Do something with this ${changed_file}."
           DIR="$(dirname "${changed_file}")"
           echo $DIR
+          
           if [ "$DIR" != ".github/workflows" ]; then
             dockerfile=`ls Dockerfile.*`
             IFS='.' read -ra names_array <<< "$dockerfile"
