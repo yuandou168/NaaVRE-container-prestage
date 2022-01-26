@@ -10,7 +10,6 @@ arg_parser.add_argument('--param_webdav_login', action='store', type=str, requir
 arg_parser.add_argument('--param_webdav_password', action='store', type=str, required='True', dest='param_webdav_password')
 
 args = arg_parser.parse_args()
-
 param_webdav_login = args.param_webdav_login
 param_webdav_password = args.param_webdav_password
 
