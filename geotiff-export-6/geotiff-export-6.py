@@ -1,7 +1,7 @@
 from laserfarm import GeotiffWriter
 import argparse
-arg_parser = argparse.ArgumentParser()
 
+arg_parser = argparse.ArgumentParser()
 arg_parser.add_argument('--features', action='store', type=, required='True', dest='features')
 
 arg_parser.add_argument('--param_webdav_login', action='store', type=, required='True', dest='param_webdav_login')
