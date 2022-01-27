@@ -1,9 +1,6 @@
 import pathlib
 
 
-
-                    
-
 conf_remote_path_root = pathlib.Path('/webdav')
 conf_remote_path_ahn = pathlib.Path('/webdav/ahn')
 conf_remote_path_retiled = pathlib.Path('/webdav/retiled/')
