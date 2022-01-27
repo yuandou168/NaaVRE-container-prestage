@@ -4,7 +4,6 @@ import fnmatch
 from laserfarm.remote_utils import get_wdclient
 import argparse
 arg_parser = argparse.ArgumentParser()
-
 arg_parser.add_argument('--feature_extraction_input', action='store', type=str, required='True', dest='feature_extraction_input')
 arg_parser.add_argument('--last_modified', action='store', type=str, required='True', dest='last_modified')
 arg_parser.add_argument('--last_run', action='store', type=str, required='True', dest='last_run')
