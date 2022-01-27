@@ -27,7 +27,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - uses: actions/checkout@v2
-      - name: Build image
+      - name: Build and push image
         run:  |
           for changed_file in ${{ needs.get-changed-files.outputs.files }}; do
             dir="$(dirname "${changed_file}")"
