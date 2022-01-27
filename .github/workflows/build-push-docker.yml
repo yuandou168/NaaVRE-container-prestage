@@ -19,6 +19,8 @@ jobs:
     - run: |
         for changed_file in ${{ steps.files.outputs.all }}; do
           DIR="$(dirname "${changed_file}")"
+          pwd
+          ls -lah 
           if [ "$DIR" != ".github/workflows" ]; then
             cd $DIR
             dockerfile=`ls Dockerfile.*`
