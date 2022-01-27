@@ -3,7 +3,6 @@ from laserfarm.remote_utils import get_wdclient
 import argparse
 arg_parser = argparse.ArgumentParser()
 
-
 arg_parser.add_argument('--param_webdav_login', action='store', type=str, required='True', dest='param_webdav_login')
 arg_parser.add_argument('--param_webdav_password', action='store', type=str, required='True', dest='param_webdav_password')
 
