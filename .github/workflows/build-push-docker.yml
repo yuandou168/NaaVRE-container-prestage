@@ -38,6 +38,9 @@ jobs:
     needs: [build,get-changed-files]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - name: checkout
+
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v1
       with:
