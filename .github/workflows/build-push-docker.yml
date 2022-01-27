@@ -18,15 +18,21 @@ jobs:
       files: ${{ steps.files.outputs.all }}
   build:
     needs: [get-changed-files]
-    strategy:
-      matrix:
-        files: ${{ needs.get-changed-files.outputs.files }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Build image
         run:  |
-          echo $files
+          for changed_file in ${{ needs.get-changed-files.outputs.files }}; do
+            dir="$(dirname "${changed_file}")"
+            if [ "$dir" != ".github/workflows" ]; then
+              cd $dir
+              dockerfile=`ls Dockerfile.*`
+              IFS='.' read -ra names_array <<< "$dockerfile"
+              echo Building ${names_array[1]}/${names_array[2]}
+              docker build . --file $dockerfile --tag ${names_array[1]}/${names_array[2]}
+            fi
+          done
 
 #  build:
 #    needs: [get-changed-files]
