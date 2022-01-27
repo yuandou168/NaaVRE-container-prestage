@@ -17,8 +17,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build image
       run:  |
-        cd cell2
-        docker build . --file Dockerfile.qcdis.cell2 --tag qcdis/cell2
         ./build_all.sh build
 
     - name: Login to GitHub Container Registry
@@ -30,7 +28,5 @@ jobs:
 
     - name: Push image to GitHub Container Registry
       run: |
-            cd cell2
-            docker push qcdis/cell2
             ./build_all.sh push
 
