@@ -8,6 +8,5 @@ conf_remote_path_targets = pathlib.Path('/webdav/targets')
 conf_local_tmp = pathlib.Path('/tmp')
 
 
-
 conf_wd_opts = { 'webdav_hostname': param_hostname, 'webdav_login': param_login, 'webdav_password': param_password}
 
