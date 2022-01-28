@@ -1,5 +1,6 @@
 from laserfarm import Retiler
 import argparse
+import pathlib
 arg_parser = argparse.ArgumentParser()
 
 arg_parser.add_argument('--laz_files', action='store', type=str, required='True', dest='laz_files')
