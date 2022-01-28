@@ -2,11 +2,11 @@ from laserfarm import Retiler
 import argparse
 arg_parser = argparse.ArgumentParser()
 
-arg_parser.add_argument('--laz_files', action='store', type=, required='True', dest='laz_files')
+arg_parser.add_argument('--laz_files', action='store', type=list, required='True', dest='laz_files')
 
-arg_parser.add_argument('--param_hostname', action='store', type=, required='True', dest='param_hostname')
-arg_parser.add_argument('--param_login', action='store', type=, required='True', dest='param_login')
-arg_parser.add_argument('--param_password', action='store', type=, required='True', dest='param_password')
+arg_parser.add_argument('--param_hostname', action='store', type=str, required='True', dest='param_hostname')
+arg_parser.add_argument('--param_login', action='store', type=str, required='True', dest='param_login')
+arg_parser.add_argument('--param_password', action='store', type=str, required='True', dest='param_password')
 
 args = arg_parser.parse_args()
 laz_files = args.laz_files
