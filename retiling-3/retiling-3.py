@@ -52,5 +52,5 @@ retiler.run()
 
 import json
 outs = {}
-outs['remote_path_retiled'] = remote_path_retiled
+outs['remote_path_retiled'] = str(remote_path_retiled)
 print(json.dumps(outs))
