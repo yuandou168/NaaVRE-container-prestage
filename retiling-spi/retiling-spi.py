@@ -48,7 +48,7 @@ retiling_input = {
     'cleanlocalfs': {}
 }
 
-file = laz_files[1]
+file = laz_files
 retiler = Retiler(file).config(retiling_input).setup_webdav_client(conf_wd_opts)
 retiler.run()
 
