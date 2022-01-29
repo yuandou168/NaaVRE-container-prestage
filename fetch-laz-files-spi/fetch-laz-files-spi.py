@@ -28,4 +28,4 @@ import json
 outs = {}
 outs['laz_files'] = laz_files
 # print(json.dumps(outs))
-# print(json.dumps(laz_files))
+print(json.dumps(laz_files))
