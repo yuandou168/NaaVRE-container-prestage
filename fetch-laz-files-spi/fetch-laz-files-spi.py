@@ -1,12 +1,14 @@
 from laserfarm.remote_utils import get_wdclient
 from laserfarm.remote_utils import list_remote
 import argparse
+import pathlib
+
 arg_parser = argparse.ArgumentParser()
 
+arg_parser.add_argument('--param_hostname', action='store', type=str, required='True', dest='param_hostname')
+arg_parser.add_argument('--param_login', action='store', type=str, required='True', dest='param_login')
+arg_parser.add_argument('--param_password', action='store', type=str, required='True', dest='param_password')
 
-arg_parser.add_argument('--param_hostname', action='store', type=, required='True', dest='param_hostname')
-arg_parser.add_argument('--param_login', action='store', type=, required='True', dest='param_login')
-arg_parser.add_argument('--param_password', action='store', type=, required='True', dest='param_password')
 
 args = arg_parser.parse_args()
 
@@ -25,4 +27,5 @@ laz_files = [f for f in list_remote(get_wdclient(conf_wd_opts), conf_remote_path
 import json
 outs = {}
 outs['laz_files'] = laz_files
-print(json.dumps(outs))
+# print(json.dumps(outs))
+print(str(laz_files))
