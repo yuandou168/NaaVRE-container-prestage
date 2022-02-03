@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     inputs:
       build_dir:
-        description : 'Building Directory'
+        description : 'Build Directory'
         required    : true
         default     : ''
 
@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build and push image
         run:  |
-          dir="$(dirname "${{ github.event.inputs.building_dir }}")"
+          dir="$(dirname "${{ github.event.inputs.build_dir }}")"
           if [ "$dir" != ".github/workflows" ]; then
             cd $dir
             dockerfile=`ls Dockerfile.*`
