@@ -38,7 +38,7 @@ jobs:
           if [ "$dir" != ".github/workflows" ]; then
             cd $dir
             docker build . --file ${{ github.event.inputs.dockerfile }} --tag ${{ github.event.inputs.image_repo }}/${{ github.event.inputs.image_name }}
-            docker push ${{ github.event.inputs.image_repo }}/${{ github.event.inputs.image_name }}
+            docker push ${{ github.event.inputs.image_repo }}/${{ github.event.inputs.image_tag }}
           fi
 
 
