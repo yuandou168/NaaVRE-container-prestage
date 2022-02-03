@@ -34,7 +34,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build and push image
         run:  |
-          dir="$(dirname "${{ github.event.inputs.build_dir }}")"
+          dir="${{ github.event.inputs.build_dir }}"
           if [ "$dir" != ".github/workflows" ]; then
             cd $dir
             docker build . --file ${{ github.event.inputs.dockerfile }} --tag ${{ github.event.inputs.image_repo }}/${{ github.event.inputs.image_tag }}
