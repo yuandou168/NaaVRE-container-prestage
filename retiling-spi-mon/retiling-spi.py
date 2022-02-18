@@ -1,6 +1,9 @@
 from laserfarm import Retiler
 import argparse
 import pathlib
+import time
+import requests
+
 arg_parser = argparse.ArgumentParser()
 
 arg_parser.add_argument('--laz_files', action='store', type=str, required='True', dest='laz_files')
@@ -17,16 +20,44 @@ param_login = args.param_login
 param_password = args.param_password
 
 conf_wd_opts = { 'webdav_hostname': param_hostname, 'webdav_login': param_login, 'webdav_password': param_password}
-conf_remote_path_retiled = pathlib.Path('/webdav/retiled/')
 conf_remote_path_ahn = pathlib.Path('/webdav/ahn')
 conf_local_tmp = pathlib.Path('/tmp')
+conf_remote_path_retiled = pathlib.Path('/webdav/retiled/')
 
 conf_wd_opts = { 'webdav_hostname': param_hostname, 'webdav_login': param_login, 'webdav_password': param_password}
-conf_remote_path_retiled = pathlib.Path('/webdav/retiled/')
 conf_remote_path_ahn = pathlib.Path('/webdav/ahn')
 conf_local_tmp = pathlib.Path('/tmp')
+conf_remote_path_retiled = pathlib.Path('/webdav/retiled/')
+
+param_grafana_base_url = 'http://52.49.203.132:32241'
+param_grafana_pwd = 'prom-operator'
 
 remote_path_retiled = conf_remote_path_retiled
+
+
+def send_annotation(start=None,end=None,message=None,tags=None):
+    if not tags:
+        tags = []
+    # tags.append(theNotebook)
+    tags.append(message)
+    
+    headers = {
+        'Accept':'application/json',
+        'Content-Type': 'application/json',
+    }
+    # for dashboardId in range(30):
+    data ={
+      # "dashboardId":dashboardId,
+    #   "panelId":8,
+      "time":start,
+      "timeEnd":end,
+      "created": end,
+      "tags":tags,
+      "text": message
+    }
+    resp = requests.post(param_grafana_base_url+'/api/annotations',verify=False,auth=('admin', param_grafana_pwd),headers=headers,json=data)
+
+start = int(round(time.time() * 1000))
 
 grid_retile = {
     'min_x': -113107.81,
@@ -47,9 +78,14 @@ retiling_input = {
     'cleanlocalfs': {}
 }
 
-file = laz_files[1]
+file = laz_files
 retiler = Retiler(file).config(retiling_input).setup_webdav_client(conf_wd_opts)
 retiler.run()
+
+end = int(round(time.time() * 1000))
+tags = [str(file)]
+send_annotation(start=start,end=end,message="Retiling",tags = tags)
+
 
 import json
 outs = {}
