@@ -1,3 +1,4 @@
+import requests
 from laserfarm.remote_utils import get_wdclient
 from laserfarm.remote_utils import list_remote
 import argparse
