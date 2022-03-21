@@ -12,6 +12,11 @@ arg_parser.add_argument('--param_hostname', action='store', type=str, required='
 arg_parser.add_argument('--param_login', action='store', type=str, required='True', dest='param_login')
 arg_parser.add_argument('--param_password', action='store', type=str, required='True', dest='param_password')
 
+
+arg_parser.add_argument('--param_grafana_base_url', action='store', type=str, required='True', dest='param_grafana_base_url')
+arg_parser.add_argument('--param_grafana_pwd', action='store', type=str, required='True', dest='param_grafana_pwd')
+arg_parser.add_argument('--param_grafana_user', action='store', type=str, required='True', dest='param_grafana_user')
+
 args = arg_parser.parse_args()
 laz_files = args.laz_files
 
@@ -19,18 +24,20 @@ param_hostname = args.param_hostname
 param_login = args.param_login
 param_password = args.param_password
 
-conf_wd_opts = { 'webdav_hostname': param_hostname, 'webdav_login': param_login, 'webdav_password': param_password}
-conf_remote_path_ahn = pathlib.Path('/webdav/ahn')
-conf_local_tmp = pathlib.Path('/tmp')
-conf_remote_path_retiled = pathlib.Path('/webdav/retiled/')
+
+param_grafana_base_url = args.param_grafana_base_url
+param_grafana_pwd = args.param_grafana_pwd
+param_grafana_user = args.param_grafana_user
 
 conf_wd_opts = { 'webdav_hostname': param_hostname, 'webdav_login': param_login, 'webdav_password': param_password}
 conf_remote_path_ahn = pathlib.Path('/webdav/ahn')
 conf_local_tmp = pathlib.Path('/tmp')
 conf_remote_path_retiled = pathlib.Path('/webdav/retiled/')
 
-param_grafana_base_url = 'http://52.49.203.132:32241'
-param_grafana_pwd = 'prom-operator'
+conf_wd_opts = { 'webdav_hostname': param_hostname, 'webdav_login': param_login, 'webdav_password': param_password}
+conf_remote_path_ahn = pathlib.Path('/webdav/ahn')
+conf_local_tmp = pathlib.Path('/tmp')
+conf_remote_path_retiled = pathlib.Path('/webdav/retiled/')
 
 remote_path_retiled = conf_remote_path_retiled
 
@@ -38,24 +45,20 @@ remote_path_retiled = conf_remote_path_retiled
 def send_annotation(start=None,end=None,message=None,tags=None):
     if not tags:
         tags = []
-    # tags.append(theNotebook)
     tags.append(message)
     
     headers = {
         'Accept':'application/json',
         'Content-Type': 'application/json',
     }
-    # for dashboardId in range(30):
     data ={
-      # "dashboardId":dashboardId,
-    #   "panelId":8,
       "time":start,
       "timeEnd":end,
       "created": end,
       "tags":tags,
       "text": message
     }
-    resp = requests.post(param_grafana_base_url+'/api/annotations',verify=False,auth=('admin', param_grafana_pwd),headers=headers,json=data)
+    resp = requests.post(param_grafana_base_url+'/api/annotations',verify=False,auth=(param_grafana_user, param_grafana_pwd),headers=headers,json=data)
 
 start = int(round(time.time() * 1000))
 
