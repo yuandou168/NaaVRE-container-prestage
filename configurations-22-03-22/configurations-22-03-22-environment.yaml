@@ -9,4 +9,4 @@ dependencies:
   - gdal
   - pip
   - pip:
-    - pathlib
+    - pathlib2
