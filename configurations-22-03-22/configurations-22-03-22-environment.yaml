@@ -6,4 +6,3 @@ dependencies:
   - pip
   - pip:
     - pathlib2
-    - pathlib
