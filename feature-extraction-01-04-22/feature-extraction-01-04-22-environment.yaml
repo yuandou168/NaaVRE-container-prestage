@@ -3,6 +3,12 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  - python==3.8
+  - pdal=2.3
+  - python-pdal
+  - gdal
   - pip
   - pip:
+    - lazperf==1.4.4
     - laserfarm
+    - click==8.0.2
