@@ -1,0 +1,11 @@
+name: venv
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - pip
+  - pip:
+    - h5py
+    - pandas
+    - json
+    - minio
