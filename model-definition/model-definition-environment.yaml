@@ -1,0 +1,10 @@
+name: venv
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - pip
+  - pip:
+    - torch
+    - torch.nn
+    - torchvision.models
